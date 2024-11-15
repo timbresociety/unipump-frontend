@@ -26,7 +26,6 @@ const HomePage = () => {
   }
   return (
     <div className="max-h-screen pt-60 h-full overflow-hidden">
-
       <BackgroundBeamsDemo />
       <PlaceholdersAndVanishInput
         placeholders={placeholders}

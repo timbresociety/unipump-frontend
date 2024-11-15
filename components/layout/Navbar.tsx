@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { useAccountEffect } from "wagmi";
 import ProfileModal from "../profile/ProfileModal";
 
-const emojis = ["🐸", "😎", "🤪", "😄", "🤓", "🥳", "😜", "🤗"]
+const emojis = ["👽", "🦄", "🚀"]
 
 const Navbar = () => {
   const [currentEmojiIndex, setCurrentEmojiIndex] = useState(0)
@@ -44,20 +44,22 @@ const Navbar = () => {
   return (
     <div className="flex absolute top-0 right-0 w-full justify-between items-center p-4">
       <ProfileModal open={open} setOpen={setOpen} />
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentEmojiIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="text-[70px] relative z-40"
-        >
-          {emojis[currentEmojiIndex]}
-        </motion.div>
-      </AnimatePresence>
+      <Link href="/">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentEmojiIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="text-[70px] relative z-40"
+          >
+            {emojis[currentEmojiIndex]}
+          </motion.div>
+        </AnimatePresence>
+      </Link>
       <Wallet className="relative z-50">
-        <ConnectWallet className="bg-white hover:bg-white">
+        <ConnectWallet withWalletAggregator className="bg-white hover:bg-white">
           <ConnectWalletText className="text-black">
             Connect Wallet
           </ConnectWalletText>

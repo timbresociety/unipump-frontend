@@ -1,7 +1,7 @@
 "use client";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { InfiniteMovingCards } from "./infinite-moving-cards";
-const words = `Hook it like its hot ...`;
+const words = `Hook it like its HOT...`;
 
 const testimonials = [
   {

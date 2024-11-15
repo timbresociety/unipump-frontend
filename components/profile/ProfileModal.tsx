@@ -16,6 +16,7 @@ const ProfileModal = ({
     setOpen: (open: boolean) => void
 }) => {
     return (
+
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
