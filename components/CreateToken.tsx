@@ -27,7 +27,7 @@ const formSchema = z.object({
     }),
     twitter: z.string().optional(),
     discord: z.string().optional(),
-    description: z.string().min(2, {
+    description: z.string().min(10, {
         message: "Description must be at least 10 characters.",
     }),
 })
