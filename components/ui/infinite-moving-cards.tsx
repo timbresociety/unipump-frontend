@@ -7,7 +7,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export const InfiniteMovingCards = ({
-    items,
     direction = "left",
     speed = "fast",
     pauseOnHover = true,
@@ -31,6 +30,7 @@ export const InfiniteMovingCards = ({
 
     useEffect(() => {
         addAnimation();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [start, setStart] = useState(false);
@@ -92,7 +92,7 @@ export const InfiniteMovingCards = ({
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
             >
-                {data && data.map((item, idx) => (
+                {data && data.map((item) => (
                     <Link href={`/token/?address=${item.memeTokenAddress}`}
                         key={item.name}
                     >

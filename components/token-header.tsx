@@ -1,20 +1,17 @@
 "'use client'"
-import { UniPumpAbi } from "@/abi/UniPumpAbi.s"
-import { UNIPUMP_ADDRESS } from "@/lib/addresses"
 import { Address } from "@coinbase/onchainkit/identity"
 import Image from "next/image"
-import { useReadContract } from "wagmi"
 import { Card } from "./ui/card"
 
 export function TokenHeader({ tokenData }: {
   tokenData: any
 }) {
-  const { data } = useReadContract({
-    abi: UniPumpAbi,
-    address: UNIPUMP_ADDRESS,
-    functionName: "cap",
-    args: [tokenData.memeTokenAddress as `0x${string}`, UNIPUMP_ADDRESS as `0x${string}`],
-  })
+  // const { data } = useReadContract({
+  //   abi: UniPumpAbi,
+  //   address: UNIPUMP_ADDRESS,
+  //   functionName: "cap",
+  //   args: [tokenData.memeTokenAddress as `0x${string}`, UNIPUMP_ADDRESS as `0x${string}`],
+  // })
 
   return (
     <Card className="w-full mb-4">

@@ -35,7 +35,7 @@ export default function TransactionComponent({
 
     const handleOnStatus = useCallback((status: LifecycleStatus) => {
         handleOnStatus2(status);
-    }, []);
+    }, [handleOnStatus2]);
 
     return address && chainId ? (
         <Transaction
@@ -48,9 +48,6 @@ export default function TransactionComponent({
                 args,
             }]}
             className='mt-4'
-            onError={(error) => {
-                debugger
-            }}
             onStatus={handleOnStatus}
         >
             <TransactionButton disabled={disabled} className='bg-white hover:bg-white' text={cta} />

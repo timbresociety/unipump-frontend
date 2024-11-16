@@ -63,7 +63,7 @@ const FaucetPage = () => {
                             setLoading(false);
                             toast.dismiss();
                             toast.success("Tokens sent successfully");
-                        } catch (error) {
+                        } catch {
                             toast.dismiss();
                             toast.error("Error sending tokens");
                         }

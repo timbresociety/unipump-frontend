@@ -2,6 +2,7 @@
 import { Card } from "@/components/ui/card"
 import { Address } from "@coinbase/onchainkit/identity"
 import { ExternalLink, Heart, MessageSquare } from "lucide-react"
+import Image from "next/image"
 import { useAccount } from "wagmi"
 
 export function CryptoProfile() {
@@ -10,9 +11,11 @@ export function CryptoProfile() {
     <Card className="w-full relative z-50 p-6 rounded-lg">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-4">
-          <img
+          <Image
             src={'https://pump.mypinata.cloud/ipfs/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1?img-width=128&img-dpr=2&img-onerror=redirects'}
             alt="Profile"
+            width={12}
+            height={12}
             className="rounded-full w-12 h-12 "
           />
           <div>

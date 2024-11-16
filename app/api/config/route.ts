@@ -1,6 +1,3 @@
-import client from "@/lib/client";
-import { GetAllSales, GetTokenPriceData } from "@/lib/queries";
-
 export async function GET() {
   const tradingViewConfig = {
     supported_resolutions: ["1", "5", "15", "30", "60", "1D", "1W", "1M"],

@@ -21,7 +21,6 @@ interface Comment {
 }
 
 export function ThreadUi() {
-  const [activeTab, setActiveTab] = useState("thread")
   const [comments, setComments] = useState<Comment[]>([
     {
       id: "1",

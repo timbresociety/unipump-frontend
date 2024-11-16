@@ -67,6 +67,7 @@ const CreateToken = ({
         if (searchTicker) {
             form.setValue('ticker', searchTicker)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams])
 
     return (
