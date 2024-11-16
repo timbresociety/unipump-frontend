@@ -6,7 +6,6 @@ import { UNIPUMP_ADDRESS } from "@/lib/addresses"
 import Big from "big.js"
 import Image from "next/image"
 import Link from "next/link"
-import { parseUnits } from "viem"
 import { useReadContract } from "wagmi"
 import { Card } from "./ui/card"
 
@@ -28,7 +27,6 @@ export function CryptoDashboard({ tokenData }: { tokenData: any }) {
     }
   })
 
-  const marketCap = Big(parseUnits("6.9", 18).toString())
 
   return (
     <Card className="mt-4 p-6">
