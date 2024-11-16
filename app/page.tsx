@@ -1,7 +1,7 @@
 "use client";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import { BackgroundBeamsDemo } from "@/components/ui/title";
+import { BackgroundBeamsDemo, words } from "@/components/ui/title";
 import useGetAllSales from "@/hooks/useGetAllSales";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,13 +31,16 @@ const HomePage = () => {
   }
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="max-h-screen pt-36 h-full overflow-hidden">
-        {/* <div className="max-w-[300px] flex items-center justify-center relative z-50 mx-auto">
+      <div className="max-h-screen pt-10 h-full overflow-hidden">
+        <div className="max-w-[300px] flex items-center justify-center relative z-50 mx-auto">
           <Image src={"/images/rocket.png"} alt="rocket" width={70} height={70} />
           <Image src={"/images/unipump.png"} alt="pump" width={160} height={160} />
-        </div> */}
+        </div>
         <Toaster />
-        <TextGenerateEffect duration={2} filter={false} words={"Current Unicorn"} className="text-center text-2xl" />
+        <div className="mx-auto max-w-[500px] text-center p-4">
+          <TextGenerateEffect duration={2} filter={false} words={words} />
+        </div>
+        <TextGenerateEffect duration={2} filter={false} words={"Current Unicorn"} className="text-center md:text-3xl" />
         {data && data.filter(item => item.memeTokenAddress.toLowerCase() === "0x0f1aa5058a58e56d99365fbab232bef578a0ad2d".toLowerCase()).map((item) => (
           <Link href={`/token/?address=${item.memeTokenAddress}`}
             key={item.name}

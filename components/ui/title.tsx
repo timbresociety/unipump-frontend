@@ -1,7 +1,7 @@
 "use client";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { InfiniteMovingCards } from "./infinite-moving-cards";
-const words = `Hook it like its HOT...`;
+export const words = `Hook it like its HOT...`;
 
 const testimonials = [
   {
@@ -52,9 +52,6 @@ const testimonials = [
 export function BackgroundBeamsDemo() {
   return (
     <div className="w-full rounded-md relative flex flex-col items-center justify-center antialiased">
-      <div className="mx-auto max-w-[500px] text-center p-4">
-        <TextGenerateEffect duration={2} filter={false} words={words} />
-      </div>
       <InfiniteMovingCards
         items={testimonials}
         direction="right"
