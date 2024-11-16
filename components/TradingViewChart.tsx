@@ -16,11 +16,12 @@ export const TradingViewChartMain = memo(
         useEffect(() => {
             if (!window) return;
             const widgetOptions: ChartingLibraryWidgetOptions = {
+                // symbol: "NYSE",
                 symbol: props.symbol,
-                // symbol: props.symbol,
                 // BEWARE: no trailing slash is expected in feed URL
                 datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
                     // 'https://demo-feed-data.tradingview.com',
+                    // 'https://demo-feed-data.tradingview.com/',
                     '/api',
                     undefined,
                     {

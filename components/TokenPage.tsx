@@ -6,6 +6,7 @@ import { TokenHeader } from '@/components/token-header'
 import { TradingViewChartMain } from '@/components/TradingViewChart'
 import useGetAllSales from '@/hooks/useGetAllSales'
 import { ChartingLibraryWidgetOptions, ResolutionString } from '@/public/static/charting_library/charting_library'
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 import { useMemo, useState } from 'react'
@@ -28,7 +29,6 @@ const TokenPageComp = () => {
     const tokenAddress = searchParams.get('address')
 
     const { data } = useGetAllSales();
-    console.log("data", data);
 
     const tokenData = useMemo(() => {
         if (!data) return null;
@@ -49,7 +49,11 @@ const TokenPageComp = () => {
                 <div className='flex items-start space-x-4 justify-between'>
                     <div className='w-[70%] '>
                         <TokenHeader tokenData={tokenData} />
-                        {isScriptReady && <TradingViewChartMain {...defaultWidgetProps} symbol={tokenData.symbol} />}
+                        {tokenAddress === "0x0f1aa5058a58e56d99365fbab232bef578a0ad2d" ? <div className='h-[350px] relative w-full'>
+                            <Image src={"/images/tv.jpeg"} alt="pump" layout='fill' />
+                        </div> :
+                            isScriptReady && <TradingViewChartMain {...defaultWidgetProps} symbol={tokenData.symbol} />
+                        }
                         <ThreadUi />
                     </div>
                     <div className='w-[30%] min-w-[400px]'>

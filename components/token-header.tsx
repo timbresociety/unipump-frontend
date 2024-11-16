@@ -18,12 +18,7 @@ export function TokenHeader({ tokenData }: {
     args: [tokenData.memeTokenAddress as `0x${string}`],
   })
 
-  // const { data: poolState } = useReadContract({
-  //   abi: UniPumpAbi,
-  //   address: UNIPUMP_ADDRESS,
-  //   functionName: "getPoolState",
-  //   args: [tokenData.memeTokenAddress as `0x${string}`],
-  // })
+
 
   return (
     <Card className="w-full mb-4">

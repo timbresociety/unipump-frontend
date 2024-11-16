@@ -28,7 +28,6 @@ export function BuySell({ tokenData }: { tokenData: any }) {
   const [amount, setAmount] = useState("0.0")
   const [useWeth, setUseWeth] = useState(true)
   const [approveWeth, setApproveWeth] = useState(false)
-  console.log(approveWeth, "approveWeth");
   const { data } = useReadContract({
     address: MOCK_WETH_ADDRESS,
     abi: erc20Abi,

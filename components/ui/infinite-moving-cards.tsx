@@ -92,7 +92,7 @@ export const InfiniteMovingCards = ({
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
             >
-                {data && data.map((item) => (
+                {data && data.filter(item => item.memeTokenAddress.toLowerCase() !== "0x0f1aa5058a58e56d99365fbab232bef578a0ad2d".toLowerCase()).map((item) => (
                     <Link href={`/token/?address=${item.memeTokenAddress}`}
                         key={item.name}
                     >

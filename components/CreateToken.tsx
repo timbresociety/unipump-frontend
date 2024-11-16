@@ -70,6 +70,9 @@ const CreateToken = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams])
 
+    const args = [form.watch('name'), form.watch('ticker'), form.watch('twitter'), form.watch('discord'), form.watch('description'), form.watch('imageUri')]
+    console.log("args", args);
+
     return (
         <Dialog onOpenChange={(open) => {
             if (!open) {
@@ -177,7 +180,7 @@ const CreateToken = ({
                                 handleOnStatus2={() => {
                                     queryClient.invalidateQueries({ queryKey: ["getAllSales"] })
                                 }}
-                                args={[form.watch('name'), form.watch('ticker'), form.watch('twitter'), form.watch('discord'), form.watch('description'), form.watch('imageUri')]}
+                                args={args}
                             />
                         </div>
                     </form>
