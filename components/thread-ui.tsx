@@ -82,7 +82,7 @@ export function ThreadUi() {
   }
 
   return (
-    <Card className="w-full border-none text-white bg-stone-950">
+    <Card className="w-full border-none mt-4 text-white bg-stone-950">
       <CardHeader className="border-none">
         <Tabs defaultValue="thread" className="w-full">
           <TabsList className="grid w-52 grid-cols-2">

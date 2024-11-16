@@ -146,7 +146,7 @@ export const TradingViewChartMain = memo(
             };
         }, [props]);
 
-        return <div ref={chartContainerRef} className='h-[475px]' />;
+        return <div ref={chartContainerRef} className='h-[475px] rounded-lg' />;
     }
 );
 

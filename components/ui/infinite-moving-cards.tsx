@@ -5,7 +5,6 @@ import { APP_DATA } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export const InfiniteMovingCards = ({
@@ -28,10 +27,8 @@ export const InfiniteMovingCards = ({
     className?: string;
 }) => {
     const { data } = useGetAllSales();
-    console.log("data", data);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const scrollerRef = React.useRef<HTMLUListElement>(null);
-    const router = useRouter();
 
     useEffect(() => {
         addAnimation();

@@ -1,22 +1,27 @@
 "'use client'"
+import { UniPumpAbi } from "@/abi/UniPumpAbi.s"
+import { UNIPUMP_ADDRESS } from "@/lib/addresses"
+import { Address } from "@coinbase/onchainkit/identity"
 import Image from "next/image"
-import { useState } from "react"
+import { useReadContract } from "wagmi"
+import { Card } from "./ui/card"
 
-export function TokenHeader() {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText("4T3k7aso4fmu7d29Fs1")
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+export function TokenHeader({ tokenData }: {
+  tokenData: any
+}) {
+  const { data } = useReadContract({
+    abi: UniPumpAbi,
+    address: UNIPUMP_ADDRESS,
+    functionName: "cap",
+    args: [tokenData.memeTokenAddress as `0x${string}`, UNIPUMP_ADDRESS as `0x${string}`],
+  })
 
   return (
-    <div className="w-full border-b  bg-stone-950 border-stone-800">
+    <Card className="w-full mb-4">
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center gap-4 text-sm flex-wrap">
-          <div className="font-semibold  text-stone-50">BUSSIN</div>
-          <div className=" text-stone-400">Ticker: BUSSIN</div>
+          <div className="font-semibold  text-stone-50">{tokenData.name}</div>
+          <div className=" text-stone-400">Ticker: {tokenData.symbol}</div>
           <div className="text-green-500">Market cap: $6,613.53</div>
           <div className="ml-auto flex items-center gap-2">
             <span className=" text-stone-400">by</span>
@@ -28,12 +33,14 @@ export function TokenHeader() {
                 width={24}
                 height={24}
               />
-              <span className=" px-2 py-1 rounded  bg-stone-800 text-stone-50">2CLPKU</span>
+              <span className=" px-2 py-1 rounded  bg-stone-800 !text-white">
+                <Address address={tokenData.createdBy} className="text-white" />
+              </span>
             </div>
             <span className=" text-stone-400">1 day ago</span>
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }

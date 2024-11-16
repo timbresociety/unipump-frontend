@@ -58,6 +58,13 @@ const Navbar = () => {
           </motion.div>
         </AnimatePresence>
       </Link>
+      <div className="flex items-center w-full justify-end mr-4 gap-4">
+        <Link href="/faucet" className="underline relative" style={{
+          zIndex: 1000
+        }}>
+          Faucet
+        </Link>
+      </div>
       <Wallet className="relative z-50">
         <ConnectWallet withWalletAggregator className="bg-white hover:bg-white">
           <ConnectWalletText className="text-black">

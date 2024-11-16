@@ -6,8 +6,12 @@ export const GetAllSales = gql`
       items {
         memeTokenAddress
         name
-        symbol
         bio
+        symbol
+        createdBy
+        isUSDCToken0
+        discord
+        twitter
       }
     }
   }

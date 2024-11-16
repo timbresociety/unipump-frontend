@@ -13,17 +13,19 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { APP_DATA } from "@/lib/config"
 import Image from "next/image"
 import { useState } from "react"
 import { Slippage } from "./Slippage"
 
-export function BuySell() {
+export function BuySell({ tokenData }: { tokenData: any }) {
   const [amount, setAmount] = useState("0.0")
+  const [useUsdc, setUseUsdc] = useState(true)
   return (
     <Tabs defaultValue="Buy" className="w-[400px]">
       <TabsList className="grid h-[50px] w-full rounded-xl grid-cols-2">
         <TabsTrigger value="Buy" className="h-full rounded-xl">Buy</TabsTrigger>
-        <TabsTrigger value="Sell" className="h-full rounded-xl">Sell</TabsTrigger>
+        <TabsTrigger value="Sell" onClick={() => setUseUsdc(true)} className="h-full rounded-xl">Sell</TabsTrigger>
       </TabsList>
       <TabsContent value="Buy">
         <Card>
@@ -32,18 +34,18 @@ export function BuySell() {
               <div className="flex items-center justify-between">
                 <Button
                   variant="outline"
-                  onClick={() => setAmount("0.1")}
+                  onClick={() => setUseUsdc(!useUsdc)}
                   className="bg-[#1c1f26]  text-slate-300 border-slate-700 hover:bg-slate-800"
                 >
-                  Switch To $Hook
+                  Switch To {!useUsdc ? "USDC" : tokenData.symbol}
                 </Button>
                 <Slippage />
               </div>
               <div className="relative mt-2">
                 <Input value={amount} type="text" onChange={(e) => setAmount(e.target.value)} id="name" defaultValue="Pedro Duarte" />
                 <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                  <Image src="/images/usdc.png" alt="USDC" width={20} height={20} />
-                  <span className="text-md text-slate-300">USDC</span>
+                  <Image src={useUsdc ? "/images/usdc.png" : APP_DATA[tokenData.memeTokenAddress].image} alt={useUsdc ? "USDC" : tokenData.symbol} width={20} height={20} />
+                  <span className="text-md text-slate-300">{useUsdc ? "USDC" : tokenData.symbol}</span>
                 </div>
               </div>
             </div>
@@ -53,21 +55,21 @@ export function BuySell() {
                 onClick={() => setAmount("0.1")}
                 className="bg-[#1c1f26] text-slate-300 border-slate-700 hover:bg-slate-800"
               >
-                10 USDC
+                10 {useUsdc ? "USDC" : tokenData.symbol}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setAmount("0.5")}
                 className="bg-[#1c1f26] text-slate-300 border-slate-700 hover:bg-slate-800"
               >
-                50 USDC
+                50 {useUsdc ? "USDC" : tokenData.symbol}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setAmount("1")}
                 className="bg-[#1c1f26] text-slate-300 border-slate-700 hover:bg-slate-800"
               >
-                100 USDC
+                100 {useUsdc ? "USDC" : tokenData.symbol}
               </Button>
             </div>
           </CardContent>
@@ -86,8 +88,8 @@ export function BuySell() {
               <div className="relative mt-2">
                 <Input value={amount} type="text" onChange={(e) => setAmount(e.target.value)} id="name" defaultValue="Pedro Duarte" />
                 <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                  <Image src="/images/usdc.png" alt="USDC" width={20} height={20} />
-                  <span className="text-md text-slate-300">USDC</span>
+                  <Image src={useUsdc ? "/images/usdc.png" : APP_DATA[tokenData.memeTokenAddress].image} alt={useUsdc ? "USDC" : tokenData.symbol} width={20} height={20} />
+                  <span className="text-md text-slate-300">{useUsdc ? "USDC" : tokenData.symbol}</span>
                 </div>
               </div>
             </div>
@@ -97,21 +99,21 @@ export function BuySell() {
                 onClick={() => setAmount("0.1")}
                 className="bg-[#1c1f26] text-slate-300 border-slate-700 hover:bg-slate-800"
               >
-                10 USDC
+                10 {useUsdc ? "USDC" : tokenData.symbol}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setAmount("0.5")}
                 className="bg-[#1c1f26] text-slate-300 border-slate-700 hover:bg-slate-800"
               >
-                50 USDC
+                50 {useUsdc ? "USDC" : tokenData.symbol}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setAmount("1")}
                 className="bg-[#1c1f26] text-slate-300 border-slate-700 hover:bg-slate-800"
               >
-                100 USDC
+                100 {useUsdc ? "USDC" : tokenData.symbol}
               </Button>
             </div>
           </CardContent>

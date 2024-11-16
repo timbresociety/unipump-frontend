@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { UNIPUMP_CREATOR_ADDRESS } from "@/lib/addresses"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useQueryClient } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
@@ -37,6 +38,7 @@ const CreateToken = ({
 }: {
     children: React.ReactNode,
 }) => {
+    const queryClient = useQueryClient()
     const searchParams = useSearchParams()
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -55,6 +57,7 @@ const CreateToken = ({
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
+        queryClient.invalidateQueries({ queryKey: ["getAllSales"] })
     }
 
     useEffect(() => {
