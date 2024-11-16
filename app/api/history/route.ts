@@ -1,4 +1,5 @@
-import { fetchTokenPriceData } from "@/lib/fetchPriceData";
+import client from "@/lib/client";
+import { GetAllSales, GetTokenPriceData } from "@/lib/queries";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -7,13 +8,21 @@ export async function GET(request: Request) {
   const resolution = searchParams.get("resolution");
   const symbol = searchParams.get("symbol");
 
+  const salesData = await client.query({
+    query: GetAllSales,
+  });
+
+  const tokenAddressData = salesData.data.uniPumpCreatorSaless.items.find(
+    (s: any) => s.symbol.toLowerCase() === symbol?.toLowerCase()
+  );
+
+  const tokenAddress = tokenAddressData.memeTokenAddress;
+
   if (!from || !to || !resolution || !symbol) {
     return new Response(`Pass from`, {
       status: 400,
     });
   }
-
-  const tokenAddress = "0xcda86a272531e8640cd7f1a92c01839911b90bb0";
 
   if (!tokenAddress) {
     return new Response(`Invalid symbol`, {
@@ -21,17 +30,18 @@ export async function GET(request: Request) {
     });
   }
 
-  const { data } = await fetchTokenPriceData(
-    tokenAddress,
-    parseInt(from),
-    parseInt(to),
-    resolution
-  );
+  const graphData = await client.query({
+    query: GetTokenPriceData(tokenAddress, parseInt(from), parseInt(to)),
+  });
+
+  const data = graphData.data.minBuckets.items;
 
   let status = "ok";
   if (data.length === 0) {
     status = "no_data";
   }
+
+  console.log(data, "data");
 
   const t = [];
   const o = [];

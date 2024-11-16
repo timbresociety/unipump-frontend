@@ -49,7 +49,7 @@ const TokenPage = () => {
                 <div className='flex items-start space-x-4 justify-between'>
                     <div className='w-[70%] '>
                         <TokenHeader tokenData={tokenData} />
-                        {isScriptReady && <TradingViewChartMain {...defaultWidgetProps} />}
+                        {isScriptReady && <TradingViewChartMain {...defaultWidgetProps} symbol={tokenData.symbol} />}
                         <ThreadUi />
                     </div>
                     <div className='w-[30%] min-w-[400px]'>

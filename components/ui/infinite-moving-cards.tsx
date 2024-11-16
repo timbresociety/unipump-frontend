@@ -1,7 +1,6 @@
 "use client";
 
 import useGetAllSales from "@/hooks/useGetAllSales";
-import { APP_DATA } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -101,11 +100,11 @@ export const InfiniteMovingCards = ({
                             className="w-[350px] max-w-full z-50 relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
                         >
                             <div className="flex  items-start pt-3 space-x-4 justify-between">
-                                <Image src={APP_DATA[item.memeTokenAddress].image} alt="Evervault" width={100} height={100} />
+                                <Image src={item.imageUri} alt="Evervault" width={100} height={100} />
                                 <div>
                                     <div className="flex items-center space-x-2 w-full justify-start">
                                         <div className="text-sm">Created by </div>
-                                        <Image src={APP_DATA[item.memeTokenAddress].creatorImage} alt="Evervault" width={14} height={14} /></div>
+                                        <Image src={item.imageUri} alt="Evervault" width={14} height={14} /></div>
                                     <span className=" relative z-20 text-[20px] leading-0 text-gray-100 font-normal">
                                         {item.symbol}
                                     </span>

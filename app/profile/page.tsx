@@ -1,3 +1,4 @@
+'use client'
 import { CryptoProfile } from "@/components/crypto-profile";
 import { CryptoTabs } from "@/components/crypto-tabs";
 
@@ -7,7 +8,7 @@ const ProfilePage = () => {
       <CryptoProfile />
       <CryptoTabs />
     </div>
-  </div>;
+  </div>
 };
 
 export default ProfilePage;

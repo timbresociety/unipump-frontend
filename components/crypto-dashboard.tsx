@@ -1,7 +1,6 @@
 "'use client'"
 
 import { Progress } from "@/components/ui/progress"
-import { APP_DATA } from "@/lib/config"
 import Image from "next/image"
 import Link from "next/link"
 import { Card } from "./ui/card"
@@ -25,7 +24,7 @@ export function CryptoDashboard({ tokenData }: { tokenData: any }) {
 
         <div className="flex items-start gap-6">
           <Image
-            src={APP_DATA[tokenData.memeTokenAddress].image}
+            src={tokenData.imageUri}
             alt="NVIDIA AI CAT"
             width={200}
             height={200}

@@ -42,7 +42,9 @@ export function useWagmiConfig() {
       connectors,
       ssr: true,
       transports: {
-        [baseSepolia.id]: http(),
+        [baseSepolia.id]: http(
+          "https://base-sepolia.g.alchemy.com/v2/2FYynUYOLgJk49PwM0_dphTkZuaw5yUe"
+        ),
       },
     });
 

@@ -18,34 +18,42 @@ export default function TransactionComponent({
     contractAddress,
     contractAbi,
     functionName,
+    cta,
     args,
+    handleOnStatus2,
+    disabled,
 }: {
     contractAddress: Address;
     functionName: string;
     args: any[];
+    cta: string;
+    disabled?: boolean;
+    handleOnStatus2: (status: LifecycleStatus) => void;
     contractAbi: any;
 }) {
     const { address, chainId } = useAccount();
 
     const handleOnStatus = useCallback((status: LifecycleStatus) => {
-        console.log('LifecycleStatus', status);
+        handleOnStatus2(status);
     }, []);
 
     return address && chainId ? (
         <Transaction
+            key={cta}
             chainId={chainId}
-            contracts={[
-                {
-                    address: contractAddress,
-                    abi: contractAbi,
-                    functionName,
-                    args,
-                }
-            ]}
+            contracts={[{
+                address: contractAddress,
+                abi: contractAbi,
+                functionName,
+                args,
+            }]}
             className='mt-4'
+            onError={(error) => {
+                debugger
+            }}
             onStatus={handleOnStatus}
         >
-            <TransactionButton className='bg-white hover:bg-white' text="Submit" />
+            <TransactionButton disabled={disabled} className='bg-white hover:bg-white' text={cta} />
             <TransactionSponsor />
             <TransactionStatus>
                 <TransactionStatusLabel />

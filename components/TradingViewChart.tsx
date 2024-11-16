@@ -16,7 +16,7 @@ export const TradingViewChartMain = memo(
         useEffect(() => {
             if (!window) return;
             const widgetOptions: ChartingLibraryWidgetOptions = {
-                symbol: 'METH',
+                symbol: props.symbol,
                 // symbol: props.symbol,
                 // BEWARE: no trailing slash is expected in feed URL
                 datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(

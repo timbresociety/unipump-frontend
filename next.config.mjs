@@ -3,9 +3,21 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "https",
         hostname: "pump.mypinata.cloud",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
       },
     ],
+  },
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, net: false, tls: false };
+    config.externals.push("pino-pretty", "lokijs", "encoding");
+    return config;
   },
 };
 

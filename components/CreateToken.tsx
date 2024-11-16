@@ -26,6 +26,7 @@ const formSchema = z.object({
     ticker: z.string().min(2, {
         message: "Ticker must be at least 3 characters.",
     }),
+    imageUri: z.string().optional(),
     twitter: z.string().optional(),
     discord: z.string().optional(),
     description: z.string().min(10, {
@@ -46,6 +47,7 @@ const CreateToken = ({
         defaultValues: {
             name: "",
             ticker: '',
+            imageUri: "",
             twitter: "",
             discord: "",
             description: "",
@@ -146,14 +148,31 @@ const CreateToken = ({
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="imageUri"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Image URI</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="(Optional)" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
                         <div className="flex justify-end ">
                             <div className="h-[20px]"></div>
                             <TransactionComponent
                                 contractAddress={UNIPUMP_CREATOR_ADDRESS}
                                 contractAbi={UniPumpCreatorAbi}
+                                cta="Create Token"
                                 functionName="createTokenSale"
-                                args={[form.watch('name'), form.watch('ticker'), form.watch('twitter'), form.watch('discord'), form.watch('description')]}
+                                handleOnStatus2={() => {
+                                    console.log("Success")
+                                }}
+                                args={[form.watch('name'), form.watch('ticker'), form.watch('twitter'), form.watch('discord'), form.watch('description'), form.watch('imageUri')]}
                             />
                         </div>
                     </form>
