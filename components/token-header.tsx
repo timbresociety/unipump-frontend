@@ -1,17 +1,22 @@
 "'use client'"
+import { UniPumpAbi } from "@/abi/UniPumpAbi.s"
+import { UNIPUMP_ADDRESS } from "@/lib/addresses"
 import { Address } from "@coinbase/onchainkit/identity"
 import Image from "next/image"
+import { formatUnits } from "viem"
+import { useReadContract } from "wagmi"
 import { Card } from "./ui/card"
+import Big from "big.js"
 
 export function TokenHeader({ tokenData }: {
   tokenData: any
 }) {
-  // const { data } = useReadContract({
-  //   abi: UniPumpAbi,
-  //   address: UNIPUMP_ADDRESS,
-  //   functionName: "cap",
-  //   args: [tokenData.memeTokenAddress as `0x${string}`, UNIPUMP_ADDRESS as `0x${string}`],
-  // })
+  const { data } = useReadContract({
+    abi: UniPumpAbi,
+    address: UNIPUMP_ADDRESS,
+    functionName: "cap",
+    args: [tokenData.memeTokenAddress as `0x${string}`],
+  })
 
   return (
     <Card className="w-full mb-4">
@@ -19,7 +24,7 @@ export function TokenHeader({ tokenData }: {
         <div className="flex items-center gap-4 text-sm flex-wrap">
           <div className="font-semibold  text-stone-50">{tokenData.name}</div>
           <div className=" text-stone-400">Ticker: {tokenData.symbol}</div>
-          <div className="text-green-500">Market cap: $6,613.53</div>
+          <div className="text-green-500">Market cap: {data ? "$" + Big(formatUnits(data, 18)).mul(3000).toFixed(2) : "0"}</div>
           <div className="ml-auto flex items-center gap-2">
             <span className=" text-stone-400">by</span>
             <div className="flex items-center gap-2">

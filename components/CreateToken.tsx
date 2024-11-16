@@ -171,7 +171,7 @@ const CreateToken = ({
                                 cta="Create Token"
                                 functionName="createTokenSale"
                                 handleOnStatus2={() => {
-                                    console.log("Success")
+                                    queryClient.invalidateQueries({ queryKey: ["getAllSales"] })
                                 }}
                                 args={[form.watch('name'), form.watch('ticker'), form.watch('twitter'), form.watch('discord'), form.watch('description'), form.watch('imageUri')]}
                             />

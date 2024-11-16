@@ -30,9 +30,14 @@ export async function GET(request: Request) {
     });
   }
 
-  const graphData = await client.query({
-    query: GetTokenPriceData(tokenAddress, parseInt(from), parseInt(to)),
-  });
+  let graphData: any;
+  try {
+    graphData = await client.query({
+      query: GetTokenPriceData(tokenAddress, parseInt(from), parseInt(to)),
+    });
+  } catch (error) {
+    console.log("erroro", error);
+  }
 
   const data = graphData.data.minBuckets.items;
 

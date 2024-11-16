@@ -7,7 +7,7 @@ const useGetAllSales = () => {
         queryKey: ["getAllSales"],
         queryFn: async () => {
             const { data } = await client.query({ query: GetAllSales });
-            return data.uniPumpCreatorSaless.items;
+            return data.uniPumpCreatorSaless.items
         },
     });
 };

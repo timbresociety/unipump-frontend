@@ -14,6 +14,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import { MOCK_WETH_ADDRESS, UNIPUMP_ADDRESS } from "@/lib/addresses";
+import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
 import { Address, erc20Abi, formatUnits, parseUnits } from "viem";
@@ -22,6 +23,7 @@ import { Slippage } from "./Slippage";
 import TransactionComponent from "./Transaction";
 
 export function BuySell({ tokenData }: { tokenData: any }) {
+  const queryClient = useQueryClient()
   const { address } = useAccount()
   const [amount, setAmount] = useState("0.0")
   const [useWeth, setUseWeth] = useState(true)
@@ -41,12 +43,24 @@ export function BuySell({ tokenData }: { tokenData: any }) {
   })
 
 
-  function isTransactionDisabled({ amount, data }: { amount: string; data: bigint | undefined }) {
+  function isTransactionDisabled() {
     if (!amount || parseFloat(amount) <= 0) return true
-    if (!data) return false
-    return data === BigInt(0)
+    if (data !== undefined) {
+      return data === BigInt(0)
+    }
+    return false
+  }
+  function isSellTransactionDisabled() {
+    if (!amount || parseFloat(amount) <= 0) return true
+    if (tokenBalance !== undefined) {
+      return tokenBalance === BigInt(0)
+    }
+    return false
   }
 
+  const isDisabled = isTransactionDisabled()
+  console.log("isDisabled", isDisabled);
+  const isSellDisabled = isSellTransactionDisabled()
 
   return (
     <Tabs defaultValue="Buy" className="w-[400px]">
@@ -114,6 +128,7 @@ export function BuySell({ tokenData }: { tokenData: any }) {
                 handleOnStatus2={(status) => {
                   if (status.statusName === "success") {
                     setApproveWeth(true)
+                    queryClient.invalidateQueries({ queryKey: ["getAllSales"] })
                   }
                 }}
                 cta="Buy"
@@ -129,7 +144,7 @@ export function BuySell({ tokenData }: { tokenData: any }) {
                     setApproveWeth(true)
                   }
                 }}
-                disabled={isTransactionDisabled({ amount, data })}
+                disabled={isDisabled}
                 cta="Approve"
                 contractAddress={MOCK_WETH_ADDRESS}
                 contractAbi={erc20Abi}
@@ -194,6 +209,8 @@ export function BuySell({ tokenData }: { tokenData: any }) {
                 handleOnStatus2={(status) => {
                   if (status.statusName === "success") {
                     setApproveWeth(true)
+                    queryClient.invalidateQueries({ queryKey: ["getAllSales"] })
+
                   }
                 }}
                 cta="Sell"
@@ -209,7 +226,7 @@ export function BuySell({ tokenData }: { tokenData: any }) {
                     setApproveWeth(true)
                   }
                 }}
-                disabled={isTransactionDisabled({ amount, data: tokenBalance })}
+                disabled={isSellDisabled}
                 cta="Approve"
                 contractAddress={MOCK_WETH_ADDRESS}
                 contractAbi={erc20Abi}
