@@ -2,11 +2,11 @@
 import { UniPumpAbi } from "@/abi/UniPumpAbi.s"
 import { UNIPUMP_ADDRESS } from "@/lib/addresses"
 import { Address } from "@coinbase/onchainkit/identity"
+import Big from "big.js"
 import Image from "next/image"
 import { formatUnits } from "viem"
 import { useReadContract } from "wagmi"
 import { Card } from "./ui/card"
-import Big from "big.js"
 
 export function TokenHeader({ tokenData }: {
   tokenData: any
@@ -17,6 +17,13 @@ export function TokenHeader({ tokenData }: {
     functionName: "cap",
     args: [tokenData.memeTokenAddress as `0x${string}`],
   })
+
+  // const { data: poolState } = useReadContract({
+  //   abi: UniPumpAbi,
+  //   address: UNIPUMP_ADDRESS,
+  //   functionName: "getPoolState",
+  //   args: [tokenData.memeTokenAddress as `0x${string}`],
+  // })
 
   return (
     <Card className="w-full mb-4">

@@ -71,7 +71,11 @@ const CreateToken = ({
     }, [searchParams])
 
     return (
-        <Dialog>
+        <Dialog onOpenChange={(open) => {
+            if (!open) {
+                form.reset()
+            }
+        }}>
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
