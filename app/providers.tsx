@@ -5,6 +5,7 @@ import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { type ReactNode, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { type State, WagmiProvider } from 'wagmi';
 import { baseSepolia } from 'wagmi/chains'; // add baseSepolia for testing
 
@@ -23,6 +24,7 @@ export function Providers(props: {
                     chain={baseSepolia}
                 >
                     <RainbowKitProvider modalSize="compact">
+                        <Toaster />
                         <Navbar />
                         {props.children}
                     </RainbowKitProvider>
